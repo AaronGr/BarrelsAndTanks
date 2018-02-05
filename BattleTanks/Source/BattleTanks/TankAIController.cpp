@@ -6,6 +6,15 @@ void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
+
+	ATank* PlayerTank = GetPlayerTank();
+	if (PlayerTank) {
+		UE_LOG(LogTemp, Warning, TEXT("%s player tank is in my sites"), *(PlayerTank->GetName()))
+	}
+	else {
+		UE_LOG(LogTemp, Error, TEXT("Could not get player target tank."))
+	}
+
 	ATank* ControlledTank = GetAIControlledTank();
 	if (ControlledTank) {
 		UE_LOG(LogTemp, Warning, TEXT("%s AI reporting for duty"), *(ControlledTank->GetName()))
@@ -18,3 +27,10 @@ void ATankAIController::BeginPlay()
 ATank* ATankAIController::GetAIControlledTank() const {
 	return Cast<ATank>(GetPawn());
 }
+
+ATank* ATankAIController::GetPlayerTank() const
+{
+	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+}
+
+
