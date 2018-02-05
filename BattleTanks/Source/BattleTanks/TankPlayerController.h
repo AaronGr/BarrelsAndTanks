@@ -23,6 +23,7 @@ public:
 private:
 	ATank* GetControlledTank() const;
 	bool GetSightRayHitLocation(FVector&) const;
+	bool GetLookDirection(FVector2D, FVector&) const;
 	
 	// Start the tank moving the barrel so that a shot would hit where
 	// the crosshair intersects the world
