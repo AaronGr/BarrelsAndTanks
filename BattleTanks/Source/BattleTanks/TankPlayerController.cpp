@@ -19,8 +19,7 @@ void ATankPlayerController::BeginPlay()
 void ATankPlayerController::Tick(float DeltaTime) 
 {
 	Super::Tick(DeltaTime);
-	FVector TmpHitLocation;
-	GetSightRayHitLocation(TmpHitLocation);
+	AimTowardsCrossHair();
 }
 
 ATank* ATankPlayerController::GetControlledTank() const 
@@ -35,8 +34,7 @@ void ATankPlayerController::AimTowardsCrossHair()
 
 	FVector HitLocation; // OUT
 	if (GetSightRayHitLocation(HitLocation)) {
-		
-
+		GetControlledTank()->AimAt(HitLocation);
 		// TODO Tell controlled tank to aim at this point
 	}
 	
@@ -53,12 +51,12 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &out_HitLocation) con
 	
 	if (GetLookDirection(ScreenLocation, LookDirection)) {
 		// Line-trace along that look direction, and see what we hit (up to max range)
-		if (GetLookVectorHitLocation(LookDirection, out_HitLocation)) {
-			UE_LOG(LogTemp, Warning, TEXT("Hit at location: %s."), *(out_HitLocation.ToString()));
-		}
+		return GetLookVectorHitLocation(LookDirection, out_HitLocation);
 	}
-
-	return false;
+	else
+	{
+		return false;
+	}
 }
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& out_LookDirection) const {
@@ -87,7 +85,6 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 		FCollisionResponseParams::DefaultResponseParam
 	)) {
 		out_HitLocation = HitResult.Location;
-		UE_LOG(LogTemp, Warning, TEXT("I hit %s."), *(HitResult.GetActor()->GetName()));
 		return true;
 	}
 	else {
