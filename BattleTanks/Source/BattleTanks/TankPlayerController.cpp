@@ -35,7 +35,7 @@ void ATankPlayerController::AimTowardsCrossHair()
 
 	FVector HitLocation; // OUT
 	if (GetSightRayHitLocation(HitLocation)) {
-		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *(HitLocation.ToString()))
+		
 
 		// TODO Tell controlled tank to aim at this point
 	}
@@ -50,20 +50,49 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &out_HitLocation) con
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	auto ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
 	FVector LookDirection;
+	
 	if (GetLookDirection(ScreenLocation, LookDirection)) {
-		UE_LOG(LogTemp, Warning, TEXT("World Direction: %s"), *(LookDirection.ToString()))
+		// Line-trace along that look direction, and see what we hit (up to max range)
+		if (GetLookVectorHitLocation(LookDirection, out_HitLocation)) {
+			UE_LOG(LogTemp, Warning, TEXT("Hit at location: %s."), *(out_HitLocation.ToString()));
+		}
 	}
-	// Line-trace along that look direction, and see what we hit (up to max range)
-	return true;
+
+	return false;
 }
 
-bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const {
+bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& out_LookDirection) const {
 	// De-project the screen position of the crosshair to a world direction
 	FVector WorldLocation; // To be Discarded
 	return DeprojectScreenPositionToWorld(
 		ScreenLocation.X,
 		ScreenLocation.Y,
 		WorldLocation,
-		LookDirection
+		out_LookDirection
 	);
 }
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& out_HitLocation) const
+{
+	FHitResult HitResult;
+	auto StartLocation = PlayerCameraManager->GetCameraLocation();
+	auto EndLocation = StartLocation + (LookDirection * LineTraceRange);
+
+	if (GetWorld()->LineTraceSingleByChannel(
+		HitResult,
+		StartLocation,
+		EndLocation,
+		ECollisionChannel::ECC_Visibility,
+		FCollisionQueryParams::DefaultQueryParam,
+		FCollisionResponseParams::DefaultResponseParam
+	)) {
+		out_HitLocation = HitResult.Location;
+		UE_LOG(LogTemp, Warning, TEXT("I hit %s."), *(HitResult.GetActor()->GetName()));
+		return true;
+	}
+	else {
+		out_HitLocation = FVector(0);
+		return false;
+	}
+}
+
