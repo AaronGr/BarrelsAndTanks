@@ -18,11 +18,14 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	void AimAt(FVector) const;
 
+	void AimAt(FVector) const;
 
 	// Called every frame
 	void Tick(float DeltaTime) override;
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 
 protected:
 
