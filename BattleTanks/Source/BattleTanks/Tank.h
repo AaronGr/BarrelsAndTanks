@@ -30,15 +30,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurretComponent* TurretToSet);
 
-protected:
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void Fire();
 
-	// Called when the game starts or when spawned
-	void BeginPlay() override;
+protected:
 
 	UTankAimingComponent * TankAimingComponent = nullptr;
 
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000; // TODO Sensible starting value
+	float LaunchSpeed = 4000; 
 
 };

@@ -14,16 +14,11 @@ ATank::ATank()
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 }
 
-void ATank::AimAt(FVector HitTarget) const
+// Called to bind functionality to input
+void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	TankAimingComponent->AimAt(HitTarget, LaunchSpeed);
-}
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-// Called when the game starts or when spawned
-void ATank::BeginPlay()
-{
-	Super::BeginPlay();
-	
 }
 
 void ATank::SetBarrelReference(UTankBarrelComponent * BarrelToSet)
@@ -36,10 +31,15 @@ void ATank::SetTurretReference(UTankTurretComponent * TurretToSet)
 	TankAimingComponent->SetTurretReference(TurretToSet);
 }
 
-// Called to bind functionality to input
-void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void ATank::AimAt(FVector HitTarget) const
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+	TankAimingComponent->AimAt(HitTarget, LaunchSpeed);
 }
+
+void ATank::Fire()
+{
+	UE_LOG(LogTemp, Warning, TEXT("I clicked and fired my lasers"))
+}
+
+
 
