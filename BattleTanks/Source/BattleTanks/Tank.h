@@ -6,6 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
+class UTankTurretComponent;
 class UTankBarrelComponent;
 class UTankAimingComponent;
 
@@ -25,6 +26,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrelComponent* BarrelToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(UTankTurretComponent* TurretToSet);
 
 protected:
 

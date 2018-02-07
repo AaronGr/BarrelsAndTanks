@@ -2,6 +2,7 @@
 
 #include "TankAimingComponent.h"
 #include "TankBarrelComponent.h"
+#include "TankTurretComponent.h"
 #include "Components/ActorComponent.h"
 #include "Classes/Kismet/GameplayStatics.h"
 
@@ -39,14 +40,20 @@ void UTankAimingComponent::AimAt(FVector HitTarget, float LaunchSpeed) const
 	if(bHaveAimSolution)
 	{
 		auto AimDirection = LaunchVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("Aiming at %s."), *AimDirection.ToString())
+		//UE_LOG(LogTemp, Warning, TEXT("Aiming at %s."), *AimDirection.ToString())
 		MoveBarrelTowards(AimDirection);
+		MoveTurretTowards(AimDirection);
 	}
 }
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrelComponent* BarrelToSet) 
 {
 	Barrel = BarrelToSet;
+}
+
+void UTankAimingComponent::SetTurretReference(UTankTurretComponent * TurretToSet)
+{
+	Turret = TurretToSet;
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) const
@@ -57,4 +64,13 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) const
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
 	Barrel->Elevate(DeltaRotator.Pitch); // TODO remove magic number
+}
+
+void UTankAimingComponent::MoveTurretTowards(FVector AimDirection) const
+{
+	auto TurretRotator = Turret->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAsRotator - TurretRotator;
+
+	Turret->Turn(DeltaRotator.Yaw);
 }

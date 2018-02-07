@@ -36,7 +36,6 @@ void ATankPlayerController::AimTowardsCrossHair()
 	FVector HitLocation; // OUT
 	if (GetSightRayHitLocation(HitLocation)) {
 		GetControlledTank()->AimAt(HitLocation);
-		// TODO Tell controlled tank to aim at this point
 	}
 	
 }
