@@ -3,9 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "TankBarrelComponent.h"
-#include "Components/ActorComponent.h"
-#include "Classes/Kismet/GameplayStatics.h"
 #include "TankAimingComponent.generated.h"
 
 // Forward Declaration

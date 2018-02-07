@@ -1,6 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimingComponent.h"
+#include "TankBarrelComponent.h"
+#include "Components/ActorComponent.h"
+#include "Classes/Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
@@ -27,7 +30,10 @@ void UTankAimingComponent::AimAt(FVector HitTarget, float LaunchSpeed) const
 		StartLocation,
 		HitTarget,
 		LaunchSpeed,
-		false
+		false,
+		0,
+		0,
+		ESuggestProjVelocityTraceOption::DoNotTrace
 	);
 
 	if(bHaveAimSolution)
