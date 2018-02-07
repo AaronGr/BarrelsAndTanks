@@ -24,7 +24,7 @@ public:
 
 	void AimAt(FVector, float) const;
 
-	void MoveBarrelTowards(FVector);
+	void MoveBarrelTowards(FVector) const;
 
 private:	
 	UTankBarrelComponent * Barrel = nullptr;

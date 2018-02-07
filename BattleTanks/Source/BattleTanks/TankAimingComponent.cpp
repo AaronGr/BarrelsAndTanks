@@ -40,7 +40,7 @@ void UTankAimingComponent::AimAt(FVector HitTarget, float LaunchSpeed) const
 	{
 		auto AimDirection = LaunchVelocity.GetSafeNormal();
 		UE_LOG(LogTemp, Warning, TEXT("Aiming at %s."), *AimDirection.ToString())
-		// MoveBarrel()
+		MoveBarrelTowards(AimDirection);
 	}
 }
 
@@ -49,12 +49,12 @@ void UTankAimingComponent::SetBarrelReference(UTankBarrelComponent* BarrelToSet)
 	Barrel = BarrelToSet;
 }
 
-void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection) const
 {
 	// Work-out difference between current barrel rotation, and AimDirection
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
-	Barrel->Elevate(5); // TODO remove magic number
+	Barrel->Elevate(DeltaRotator.Pitch); // TODO remove magic number
 }
