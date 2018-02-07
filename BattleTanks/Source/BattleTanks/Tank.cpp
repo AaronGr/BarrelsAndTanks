@@ -32,7 +32,7 @@ void ATank::Tick(float DeltaTime)
 
 }
 
-void ATank::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+void ATank::SetBarrelReference(UTankBarrelComponent * BarrelToSet)
 {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
 }
