@@ -3,6 +3,7 @@
 #include "Tank.h"
 #include "TankAimingComponent.h"
 #include "TankBarrelComponent.h"
+#include "TankTrackComponent.h"
 #include "Projectile.h"
 #include "Engine/World.h"
 
@@ -33,6 +34,16 @@ void ATank::SetBarrelReference(UTankBarrelComponent * BarrelToSet)
 void ATank::SetTurretReference(UTankTurretComponent * TurretToSet)
 {
 	TankAimingComponent->SetTurretReference(TurretToSet);
+}
+
+void ATank::SetLeftTrackReference(UTankTrackComponent * TrackToSet)
+{
+	LeftTrack = TrackToSet;
+}
+
+void ATank::SetRightTrackReference(UTankTrackComponent * TrackToSet)
+{
+	RightTrack = TrackToSet;
 }
 
 void ATank::AimAt(FVector HitTarget) const

@@ -9,6 +9,7 @@
 class UTankTurretComponent;
 class UTankBarrelComponent;
 class UTankAimingComponent;
+class UTankTrackComponent;
 class AProjectile;
 
 UCLASS()
@@ -32,13 +33,18 @@ public:
 	void SetTurretReference(UTankTurretComponent* TurretToSet);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetLeftTrackReference(UTankTrackComponent* TrackToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetRightTrackReference(UTankTrackComponent* TrackToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
 	void Fire();
 
 protected:
 
 	UTankAimingComponent * TankAimingComponent = nullptr;
 
-	
 
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)
@@ -54,5 +60,7 @@ private:
 
 	// Local barrel reference for spawning projectile
 	UTankBarrelComponent* Barrel = nullptr;
+	UTankTrackComponent* LeftTrack = nullptr;
+	UTankTrackComponent* RightTrack = nullptr;
 
 };
