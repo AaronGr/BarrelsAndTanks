@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "ProjectileActor.generated.h"
+#include "Projectile.generated.h"
 
 UCLASS()
-class BATTLETANKS_API AProjectileActor : public AActor
+class BATTLETANKS_API AProjectile : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AProjectileActor();
+	AProjectile();
 
 protected:
 	// Called when the game starts or when spawned
@@ -22,7 +22,5 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	
 	
 };
