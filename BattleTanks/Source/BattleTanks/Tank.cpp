@@ -4,6 +4,7 @@
 #include "TankAimingComponent.h"
 #include "TankBarrelComponent.h"
 #include "TankTrackComponent.h"
+#include "TankMovementComponent.h"
 #include "Projectile.h"
 #include "Engine/World.h"
 
@@ -15,6 +16,7 @@ ATank::ATank()
 
 	// No need to protect pointer as added at construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
 	
 }
 
