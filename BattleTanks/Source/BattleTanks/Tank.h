@@ -34,12 +34,6 @@ public:
 	void SetTurretReference(UTankTurretComponent* TurretToSet);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetLeftTrackReference(UTankTrackComponent* TrackToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetRightTrackReference(UTankTrackComponent* TrackToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
 	void Fire();
 
 protected:
