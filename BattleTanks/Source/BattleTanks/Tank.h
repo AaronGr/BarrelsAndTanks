@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Aaron Gravelle
 
 #pragma once
 
@@ -26,6 +26,8 @@ public:
 	void Fire();
 
 protected:
+	virtual void BeginPlay() override;
+
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent * TankAimingComponent = nullptr;
 

@@ -33,7 +33,7 @@ protected:
 	void Initialize(UTankBarrelComponent* BarrelToSet, UTankTurretComponent* TurretToSet);
 
 	UPROPERTY(BlueprintReadonly, Category = "State")
-	EFiringState FiringStatus = EFiringState::Locked;
+	EFiringState FiringStatus = EFiringState::Reloading;
 
 private:	
 	UTankBarrelComponent * Barrel = nullptr;
