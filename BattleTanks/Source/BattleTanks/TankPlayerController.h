@@ -9,7 +9,6 @@
 /**
  * Responsible for helping the player aim
  */
-class ATank;
 class UTankAimingComponent;
 
 UCLASS()
@@ -22,21 +21,10 @@ public:
 	void Tick(float DeltaTime) override;
 	
 protected:
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATank* GetControlledTank() const;
-
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimingComponent(UTankAimingComponent* AimComp);
 
 private:
-	bool GetSightRayHitLocation(FVector&) const;
-	bool GetLookDirection(FVector2D, FVector&) const;
-	bool GetLookVectorHitLocation(FVector, FVector&) const;
-	
-	// Start the tank moving the barrel so that a shot would hit where
-	// the crosshair intersects the world
-	void AimTowardsCrossHair();
-
 	UPROPERTY(EditAnywhere)
 	float CrossHairXLocation = 0.5f;
 
@@ -45,4 +33,15 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float LineTraceRange = 1000000.0f;
+
+	UTankAimingComponent* AimingComponent = nullptr;
+
+	bool GetSightRayHitLocation(FVector&) const;
+	bool GetLookDirection(FVector2D, FVector&) const;
+	bool GetLookVectorHitLocation(FVector, FVector&) const;
+
+	// Start the tank moving the barrel so that a shot would hit where
+	// the crosshair intersects the world
+	void AimTowardsCrossHair();
+
 };

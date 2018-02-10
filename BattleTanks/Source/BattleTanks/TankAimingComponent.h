@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Aaron Gravelle
 
 #pragma once
 
@@ -28,6 +28,9 @@ public:
 	void AimAt(FVector, float) const;
 	void MoveBarrelTowards(FVector) const;
 
+	UPROPERTY(EditAnywhere, Category = "Firing")
+	float LaunchSpeed = 5000.f;
+
 protected:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialize(UTankBarrelComponent* BarrelToSet, UTankTurretComponent* TurretToSet);
@@ -39,4 +42,5 @@ private:
 	UTankBarrelComponent * Barrel = nullptr;
 	UTankTurretComponent * Turret = nullptr;
 
+	
 };

@@ -1,8 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Tank.h"
-#include "TankAimingComponent.h"
-#include "TankMovementComponent.h"
 #include "TankBarrelComponent.h"
 #include "Projectile.h"
 #include "Engine/World.h"
@@ -12,20 +10,12 @@ ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	UE_LOG(LogTemp, Warning, TEXT("ATank Constructor Called"))
 }
 
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();  // Needed for BP Begin Play to run!
 
-	UE_LOG(LogTemp, Warning, TEXT("ATank::BeginPlay() Called"))
-}
-
-void ATank::AimAt(FVector HitTarget) const
-{
-	if (!ensure(TankAimingComponent)) {return;}
-	TankAimingComponent->AimAt(HitTarget, LaunchSpeed);
 }
 
 void ATank::Fire()
