@@ -6,11 +6,9 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
-class UTankTurretComponent;
-class UTankBarrelComponent;
 class UTankAimingComponent;
-class UTankTrackComponent;
 class UTankMovementComponent;
+class UTankBarrelComponent;
 class AProjectile;
 
 UCLASS()
@@ -22,18 +20,9 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 	void AimAt(FVector) const;
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrelComponent* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(UTankTurretComponent* TurretToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Fire();
 
 protected:
@@ -45,20 +34,18 @@ protected:
 
 
 private:
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditAnywhere, Category = "Firing")
 	float LaunchSpeed = 4000; 
 
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint = nullptr;
 
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 3;
 
 	double LastFireTime = 0;
 
 	// Local barrel reference for spawning projectile
-	UTankBarrelComponent* Barrel = nullptr;
-	UTankTrackComponent* LeftTrack = nullptr;
-	UTankTrackComponent* RightTrack = nullptr;
+	UTankBarrelComponent* Barrel = nullptr; // TODO Remove
 
 };
