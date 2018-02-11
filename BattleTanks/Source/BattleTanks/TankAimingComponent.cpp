@@ -46,7 +46,10 @@ void UTankAimingComponent::Initialize(UTankBarrelComponent * BarrelToSet, UTankT
 	AimDirection = Barrel->GetForwardVector();
 }
 
-
+EFiringState UTankAimingComponent::GetFiringState() const
+{
+	return FiringState;
+}
 
 void UTankAimingComponent::AimAt(FVector HitTarget, float LaunchSpeed)
 {

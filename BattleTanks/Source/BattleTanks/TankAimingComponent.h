@@ -31,6 +31,8 @@ public:
 	void AimAt(FVector, float);
 	void MoveBarrelTowards(FVector) const;
 
+	EFiringState GetFiringState() const;
+
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Fire();
 
