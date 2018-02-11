@@ -34,8 +34,7 @@ void UTankMovementComponent::IntendMoveRight(float Throw)
 {
 	if (!ensure(LeftTrack && RightTrack)) { return; }
 	LeftTrack->SetThrottle(Throw);
-	RightTrack->SetThrottle(-Throw);
-	
+	RightTrack->SetThrottle(-Throw);	
 }
 
 
