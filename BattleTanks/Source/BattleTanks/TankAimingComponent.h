@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
 UENUM()
@@ -25,8 +26,9 @@ class BATTLETANKS_API UTankAimingComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UTankAimingComponent();
+	virtual void BeginPlay() override;
 
-	void AimAt(FVector, float) const;
+	void AimAt(FVector, float);
 	void MoveBarrelTowards(FVector) const;
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
@@ -40,7 +42,7 @@ protected:
 	void Initialize(UTankBarrelComponent* BarrelToSet, UTankTurretComponent* TurretToSet);
 
 	UPROPERTY(BlueprintReadonly, Category = "State")
-	EFiringState FiringStatus = EFiringState::Reloading;
+	EFiringState FiringState = EFiringState::Reloading;
 
 private:	
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
@@ -51,7 +53,11 @@ private:
 
 	UTankBarrelComponent * Barrel = nullptr;
 	UTankTurretComponent * Turret = nullptr;
+	FVector AimDirection;
 	double LastFireTime = 0;
+
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+	bool IsBarrelMoving() const;
 
 	
 };

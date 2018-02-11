@@ -29,9 +29,9 @@ void ATankPlayerController::Tick(float DeltaTime)
 
 void ATankPlayerController::AimTowardsCrossHair()
 {
-	if (!ensure(AimingComponent)) {return;}
 	FVector HitLocation; // OUT
 	if (GetSightRayHitLocation(HitLocation)) {
+		if (!ensure(AimingComponent)) { return; }
 		AimingComponent->AimAt(HitLocation, AimingComponent->LaunchSpeed);
 	}
 	
