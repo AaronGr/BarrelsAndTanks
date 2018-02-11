@@ -9,7 +9,7 @@
 UENUM()
 enum class EFiringState : uint8
 {
-	Locked, Aiming, Reloading
+	Locked, Aiming, Reloading, NoAmmo
 };
 
 // Forward Declaration
@@ -45,6 +45,9 @@ protected:
 
 	UPROPERTY(BlueprintReadonly, Category = "State")
 	EFiringState FiringState = EFiringState::Reloading;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Firing")
+	int32 AmmoCount = 5;
 
 private:	
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
