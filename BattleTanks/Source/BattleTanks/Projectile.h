@@ -8,6 +8,7 @@
 
 class UProjectileMovementComponent;
 class UCollisionMesh;
+class URadialForceComponent;
 class UParticleSystemComponent;
 
 UCLASS()
@@ -28,14 +29,17 @@ protected:
 
 	UProjectileMovementComponent * ProjectileMovementComponent = nullptr;
 
-	UPROPERTY(VisibleAnywhere, Category = "Setup")
+	UPROPERTY(VisibleAnywhere, Category = "Component")
 	UCollisionMesh* CollisionMesh = nullptr;
 
-	UPROPERTY(VisibleAnywhere, Category = "Setup")
+	UPROPERTY(VisibleAnywhere, Category = "Component")
 	UParticleSystemComponent* LaunchBlast = nullptr;
 
-	UPROPERTY(VisibleAnywhere, Category = "Setup")
+	UPROPERTY(VisibleAnywhere, Category = "Component")
 	UParticleSystemComponent* ImpactBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Component")
+	URadialForceComponent* ExplosionForce = nullptr;
 
 private:
 	UFUNCTION()
