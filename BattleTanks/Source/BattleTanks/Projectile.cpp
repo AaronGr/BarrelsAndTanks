@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Projectile.h"
+#include "CollisionMesh.h"
+#include "LaunchBlast.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
 
@@ -11,6 +13,14 @@ AProjectile::AProjectile()
 	PrimaryActorTick.bCanEverTick = true;
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement Component"));
 	ProjectileMovementComponent->bAutoActivate = false;
+
+	CollisionMesh = CreateDefaultSubobject<UCollisionMesh>(FName("Static Mesh Component"));
+	SetRootComponent(CollisionMesh);
+	CollisionMesh->SetNotifyRigidBodyCollision(true);
+	CollisionMesh->SetVisibility(false);
+
+	LaunchBlast = CreateDefaultSubobject<ULaunchBlast>(FName("Particle System Component"));
+	LaunchBlast->AttachTo(RootComponent); // TODO This is deprecated. Change to AttachToComponent
 }
 
 // Called when the game starts or when spawned

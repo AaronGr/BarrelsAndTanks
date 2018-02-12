@@ -46,16 +46,15 @@ protected:
 	UPROPERTY(BlueprintReadonly, Category = "State")
 	EFiringState FiringState = EFiringState::Reloading;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Firing")
-	int32 AmmoCount = 5;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float ReloadTimeInSeconds = 3;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		int32 AmmoCount = 5;
 
 private:	
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float ReloadTimeInSeconds = 3;
-
 	UTankBarrelComponent * Barrel = nullptr;
 	UTankTurretComponent * Turret = nullptr;
 	FVector AimDirection;
