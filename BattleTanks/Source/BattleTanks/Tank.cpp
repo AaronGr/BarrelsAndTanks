@@ -10,7 +10,12 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-
-
-
-
+float ATank::TakeDamage(float DamageAmount, FDamageEvent const & DamageEvent, AController * EventInstigator, AActor * DamageCauser)
+{
+	float DamageToApply = FMath::Clamp<float>(DamageAmount, 0.0f, CurrentHealth);
+	CurrentHealth -= DamageToApply;
+	if (CurrentHealth <= 0) {
+		 UE_LOG(LogTemp, Warning, TEXT("Died."))
+	}
+	return DamageToApply;
+}

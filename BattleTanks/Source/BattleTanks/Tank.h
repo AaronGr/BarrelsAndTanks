@@ -14,4 +14,19 @@ class BATTLETANKS_API ATank : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ATank();
+	
+	virtual float TakeDamage
+	(
+		float DamageAmount,
+		struct FDamageEvent const & DamageEvent,
+		class AController * EventInstigator,
+		AActor * DamageCauser
+	) override;
+
+private:
+	UPROPERTY(EditAnywhere, Category = "Setup")
+	float StartingHealth = 100.f;
+
+	UPROPERTY(VisibleAnywhere, Category = "Setup")
+	float CurrentHealth = StartingHealth;
 };
