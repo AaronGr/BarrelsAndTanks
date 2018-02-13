@@ -2,6 +2,7 @@
 
 #include "TankAIController.h"
 #include "TankAimingComponent.h"
+#include "Tank.h" // In order to implement OnDeath
 #include "Engine/World.h"
 
 void ATankAIController::BeginPlay()
@@ -13,6 +14,18 @@ void ATankAIController::BeginPlay()
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("AIController can't find aiming component at Begin Play"))
+	}
+}
+
+void ATankAIController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+		
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnTankDeath);
 	}
 }
 
@@ -38,4 +51,8 @@ void ATankAIController::Tick(float DeltaTime)
 	
 }
 
+void ATankAIController::OnTankDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("I died."))
+}
 

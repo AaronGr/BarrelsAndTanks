@@ -49,8 +49,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTimeInSeconds = 3;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		int32 AmmoCount = 5;
+	UPROPERTY(BlueprintReadWrite, Category = "Firing")
+	int32 AmmoCount = 5;
 
 private:	
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
